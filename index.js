@@ -1,6 +1,12 @@
 import * as core from "@actions/core";
+import * as core from "@actions/github";
 
-const name = core.getInput("name");
-const outputValue = `Hello ${name}`;
-core.setOutput("salutation", outputValue);
-  
+try {
+  const name = core.getInput("name");
+  const outputValue = `Hello ${name}`;
+  core.setOutput("salutation", outputValue);
+  const time = new Date().toTimeString();
+  core.setOutput("time", time);  
+} catch (error) {
+  core.setFailed(error.message);
+}
